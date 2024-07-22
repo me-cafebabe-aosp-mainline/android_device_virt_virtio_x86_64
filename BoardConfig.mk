@@ -4,6 +4,11 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# Kernel
+BOARD_KERNEL_CMDLINE_CONSOLE := \
+    8250.nr_uarts=1 \
+    console=ttyS0
+
 # Inherit from common
 include device/virt/virtio-common/BoardConfigCommon.mk
 
@@ -19,10 +24,6 @@ TARGET_2ND_ARCH := x86
 TARGET_2ND_ARCH_VARIANT := x86_64
 
 # Kernel
-BOARD_KERNEL_CMDLINE += \
-    8250.nr_uarts=1 \
-    console=ttyS0
-
 BOARD_KERNEL_IMAGE_NAME := bzImage
 TARGET_KERNEL_ARCH := x86
 
