@@ -4,6 +4,9 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# Boot manager
+TARGET_BOOT_MANAGER ?= grub
+
 # Kernel
 BOARD_KERNEL_CMDLINE_CONSOLE := \
     8250.nr_uarts=1 \
@@ -22,6 +25,9 @@ TARGET_ARCH_VARIANT := x86_64
 TARGET_2ND_CPU_ABI := x86
 TARGET_2ND_ARCH := x86
 TARGET_2ND_ARCH_VARIANT := x86_64
+
+# GRUB
+TARGET_GRUB_ARCH := x86_64-efi
 
 # Kernel
 BOARD_KERNEL_IMAGE_NAME := bzImage
