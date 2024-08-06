@@ -7,11 +7,6 @@
 # Boot manager
 TARGET_BOOT_MANAGER ?= grub
 
-# Kernel
-BOARD_KERNEL_CMDLINE_CONSOLE := \
-    8250.nr_uarts=1 \
-    console=ttyS0
-
 # Inherit from common
 include device/virt/virtio-common/BoardConfigCommon.mk
 
@@ -27,5 +22,9 @@ TARGET_ARCH_VARIANT := x86_64
 TARGET_GRUB_ARCH := x86_64-efi
 
 # Kernel
+BOARD_KERNEL_CMDLINE += \
+    8250.nr_uarts=1 \
+    console=ttyS0
+
 BOARD_KERNEL_IMAGE_NAME := bzImage
 TARGET_KERNEL_ARCH := x86
