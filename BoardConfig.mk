@@ -16,7 +16,7 @@ DEVICE_PATH := device/virt/virtio_x86_64
 # Arch
 TARGET_CPU_ABI := x86_64
 TARGET_ARCH := x86_64
-TARGET_ARCH_VARIANT := x86_64
+TARGET_ARCH_VARIANT := sandybridge
 
 # GRUB
 TARGET_GRUB_ARCH := x86_64-efi
