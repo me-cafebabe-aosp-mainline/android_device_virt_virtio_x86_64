@@ -32,8 +32,8 @@ license {
 filegroup {
     name: "virtio_x86_64_drm_hwcomposer_common",
     srcs: [
-        "bufferinfo/BufferInfoGetter.cpp",
-        "bufferinfo/BufferInfoMapperMetadata.cpp",
+        "modified/bufferinfo/BufferInfoGetter.cpp",
+        "modified/bufferinfo/BufferInfoMapperMetadata.cpp",
 
         "compositor/DrmKmsPlan.cpp",
         "compositor/FlatteningController.cpp",
@@ -41,7 +41,7 @@ filegroup {
         "drm/DrmAtomicStateManager.cpp",
         "drm/DrmConnector.cpp",
         "drm/DrmCrtc.cpp",
-        "drm/DrmDevice.cpp",
+        "modified/drm/DrmDevice.cpp",
         "drm/DrmDisplayPipeline.cpp",
         "drm/DrmEncoder.cpp",
         "drm/DrmFbImporter.cpp",
