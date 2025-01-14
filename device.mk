@@ -14,6 +14,10 @@ $(call inherit-product, device/virt/virtio-common/device-common.mk)
 
 DEVICE_PATH := device/virt/virtio_x86_64
 
+# Graphics (Composer)
+PRODUCT_PACKAGES += \
+    android.hardware.composer.hwc3-service.drm.virtio_x86_64
+
 # Graphics (Gralloc)
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator-service.minigbm_intel \

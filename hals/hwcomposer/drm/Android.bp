@@ -13,13 +13,13 @@
 // limitations under the License.
 
 package {
-    default_applicable_licenses: ["external_drm_hwcomposer_license"],
+    default_applicable_licenses: ["virtio_x86_64_external_drm_hwcomposer_license"],
 }
 
 // Added automatically by a large-scale-change
 // See: http://go/android-license-faq
 license {
-    name: "external_drm_hwcomposer_license",
+    name: "virtio_x86_64_external_drm_hwcomposer_license",
     visibility: [":__subpackages__"],
     license_kinds: [
         "SPDX-license-identifier-Apache-2.0",
@@ -30,7 +30,7 @@ license {
 }
 
 filegroup {
-    name: "drm_hwcomposer_common",
+    name: "virtio_x86_64_drm_hwcomposer_common",
     srcs: [
         "bufferinfo/BufferInfoGetter.cpp",
         "bufferinfo/BufferInfoMapperMetadata.cpp",
@@ -68,12 +68,12 @@ filegroup {
 }
 
 cc_binary {
-    name: "android.hardware.composer.hwc3-service.drm",
+    name: "android.hardware.composer.hwc3-service.drm.virtio_x86_64",
 
     srcs: [
         ":drm_hwcomposer_hwc3",
         ":drm_hwcomposer_service",
-        ":drm_hwcomposer_common",
+        ":virtio_x86_64_drm_hwcomposer_common",
         "bufferinfo/legacy/BufferInfoLibdrm.cpp",
     ],
 
@@ -105,6 +105,5 @@ cc_binary {
     relative_install_path: "hw",
     vendor: true,
 
-    vintf_fragments: [":drm_hwcomposer_vintf_manifest"],
-    init_rc: [":drm_hwcomposer_init_rc"],
+    init_rc: ["hwc3-drm-virtio_x86_64.rc"],
 }

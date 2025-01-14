@@ -1,6 +1,8 @@
 # GPU driver
 on early-init && property:ro.boot.gpu=i915
     exec u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -a -d /vendor/lib/modules i915.ko
+    stop vendor.hwcomposer-3
+    enable vendor.hwcomposer-3.virtio_x86_64
 
 on early-init && property:ro.boot.gpu=i915 && property:ro.boot.hardware_vulkan=intel
     setprop ro.hardware.vulkan intel
