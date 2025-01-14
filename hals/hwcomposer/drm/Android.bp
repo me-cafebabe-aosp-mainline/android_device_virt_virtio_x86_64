@@ -29,58 +29,6 @@ license {
     ],
 }
 
-cc_library_headers {
-    name: "drm_hwcomposer_headers",
-    vendor: true,
-    export_include_dirs: ["."],
-}
-
-// =====================
-// hwcomposer.drm.so
-// =====================
-cc_defaults {
-    name: "hwcomposer.drm_defaults",
-
-    shared_libs: [
-        "android.hardware.graphics.composer@2.1-resources",
-        "android.hardware.graphics.composer@2.2-resources",
-        "libcutils",
-        "libdrm",
-        "libhardware",
-        "libhidlbase",
-        "liblog",
-        "libsync",
-        "libui",
-        "libutils",
-    ],
-
-    static_libs: [
-        "libaidlcommonsupport",
-    ],
-
-    header_libs: [
-        "drm_hwcomposer_headers",
-    ],
-
-    cflags: [
-        "-Wall",
-        "-Werror",
-    ],
-
-    cppflags: [
-        "-DHWC2_INCLUDE_STRINGIFICATION",
-        "-DHWC2_USE_CPP11",
-    ],
-
-    relative_install_path: "hw",
-    vendor: true,
-}
-
-filegroup {
-    name: "drm_hwcomposer_fd",
-    srcs: ["utils/fd.cpp"],
-}
-
 filegroup {
     name: "drm_hwcomposer_common",
     srcs: [
@@ -116,64 +64,6 @@ filegroup {
         "hwc2_device/hwc2_device.cpp",
 
         "utils/fd.cpp",
-    ],
-}
-
-filegroup {
-    name: "drm_hwcomposer_hwc3",
-    srcs: [
-        "hwc3/Composer.cpp",
-        "hwc3/ComposerClient.cpp",
-        "hwc3/ComposerResources.cpp",
-        "hwc3/DrmHwcThree.cpp",
-        "hwc3/Utils.cpp",
-    ],
-}
-
-filegroup {
-    name: "drm_hwcomposer_service",
-    srcs: [
-        "hwc3/service.cpp",
-    ],
-}
-
-filegroup {
-    name: "drm_hwcomposer_init_rc",
-    srcs: [
-        "hwc3/hwc3-drm.rc",
-    ],
-}
-
-filegroup {
-    name: "drm_hwcomposer_vintf_manifest",
-    srcs: [
-        "hwc3/hwc3-drm.xml",
-    ],
-}
-
-// Kept only for compatibility with older Android version. Please do not use!
-cc_library_static {
-    name: "drm_hwcomposer",
-    defaults: ["hwcomposer.drm_defaults"],
-    srcs: [":drm_hwcomposer_common"],
-}
-
-cc_library_shared {
-    name: "hwcomposer.drm",
-    defaults: ["hwcomposer.drm_defaults"],
-    srcs: [
-        ":drm_hwcomposer_common",
-        "bufferinfo/legacy/BufferInfoLibdrm.cpp",
-    ],
-    cflags: ["-DUSE_IMAPPER4_METADATA_API"],
-}
-
-cc_library_shared {
-    name: "hwcomposer.drm_minigbm",
-    defaults: ["hwcomposer.drm_defaults"],
-    srcs: [
-        ":drm_hwcomposer_common",
-        "bufferinfo/legacy/BufferInfoMinigbm.cpp",
     ],
 }
 
@@ -217,28 +107,4 @@ cc_binary {
 
     vintf_fragments: [":drm_hwcomposer_vintf_manifest"],
     init_rc: [":drm_hwcomposer_init_rc"],
-}
-
-// Used by hwcomposer.drm_imagination
-filegroup {
-    name: "drm_hwcomposer_platformimagination",
-    srcs: ["bufferinfo/legacy/BufferInfoImagination.cpp"],
-}
-
-// Used by hwcomposer.drm_hikey and hwcomposer.drm_hikey960
-filegroup {
-    name: "drm_hwcomposer_platformhisi",
-    srcs: ["bufferinfo/legacy/BufferInfoMaliHisi.cpp"],
-}
-
-// Used by hwcomposer.drm_meson
-filegroup {
-    name: "drm_hwcomposer_platformmeson",
-    srcs: ["bufferinfo/legacy/BufferInfoMaliMeson.cpp"],
-}
-
-// Used by hwcomposer.drm_mediatek
-filegroup {
-    name: "drm_hwcomposer_platformmediatek",
-    srcs: ["bufferinfo/legacy/BufferInfoMaliMediatek.cpp"],
 }
