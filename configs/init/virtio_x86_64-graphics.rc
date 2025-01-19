@@ -9,6 +9,8 @@ on early-init && property:ro.boot.gpu=i915 && property:ro.boot.hardware_vulkan=i
 
 on early-init && property:ro.boot.gpu=i915 && property:ro.boot.hardware_vulkan=intel_hasvk
     setprop ro.hardware.vulkan intel_hasvk
+
+on early-init && property:ro.boot.gpu=i915 && property:ro.boot.gpu_workaround=all
     setprop vendor.hwc.drm.avoid_using_alpha_bits_for_framebuffer 1
     setprop vendor.hwc.drm.disable_planes 1
 
