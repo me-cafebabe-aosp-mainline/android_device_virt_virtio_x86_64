@@ -1,35 +1,23 @@
-# GPU driver
-on early-init && property:ro.boot.gpu=i915
+# i915
+on init && property:ro.vendor.graphics.gpu=i915
     exec u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -a -d /vendor/lib/modules i915.ko
+    stop vendor.graphics.allocator
+    setprop ro.hardware.gralloc minigbm_intel
+    enable vendor.graphics.allocator.intel
     stop vendor.hwcomposer-3
     enable vendor.hwcomposer-3.virtio_x86_64
+    setprop ro.vendor.graphics ${ro.boot.graphics:-mesa}
 
-on early-init && property:ro.boot.gpu=i915 && property:ro.boot.hardware_vulkan=intel
-    setprop ro.hardware.vulkan intel
-
-on early-init && property:ro.boot.gpu=i915 && property:ro.boot.hardware_vulkan=intel_hasvk
-    setprop ro.hardware.vulkan intel_hasvk
-
-on early-init && property:ro.boot.gpu=i915 && property:ro.boot.gpu_workaround=all
+on init && property:ro.vendor.graphics.gpu=i915 && property:ro.boot.gpu_workaround=all
     setprop vendor.hwc.drm.avoid_using_alpha_bits_for_framebuffer 1
     setprop vendor.hwc.drm.disable_planes 1
 
-# mesa_i915
-on late-init && property:ro.boot.graphics=mesa_i915
-    stop vendor.graphics.allocator
-    setprop ro.hardware.gralloc minigbm_intel
-    enable vendor.graphics.allocator.intel
-
-    setprop ro.hardware.egl mesa
+# i915 - mesa
+on property:ro.vendor.graphics.gpu=i915 && property:ro.vendor.graphics=mesa
     setprop ro.opengles.version 196610
 
-# swiftshader_i915
-on late-init && property:ro.boot.graphics=swiftshader_i915
-    stop vendor.graphics.allocator
-    setprop ro.hardware.gralloc minigbm_intel
-    enable vendor.graphics.allocator.intel
+on property:ro.vendor.graphics.gpu=i915 && property:ro.vendor.graphics=mesa && property:ro.boot.hardware_vulkan=intel
+    setprop ro.hardware.vulkan intel
 
-    setprop ro.cpuvulkan.version 4202496
-    setprop ro.hardware.egl angle
-    setprop ro.hardware.vulkan pastel
-    setprop ro.opengles.version 196609
+on property:ro.vendor.graphics.gpu=i915 && property:ro.vendor.graphics=mesa && property:ro.boot.hardware_vulkan=intel_hasvk
+    setprop ro.hardware.vulkan intel_hasvk
