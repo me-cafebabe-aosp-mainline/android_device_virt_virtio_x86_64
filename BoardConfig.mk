@@ -7,6 +7,10 @@
 # Boot manager
 TARGET_BOOT_MANAGER ?= grub
 
+# GRUB
+TARGET_GRUB_ARCH := x86_64-efi
+TARGET_GRUB_2ND_ARCH := i386-pc
+
 # Inherit from common
 include device/virt/virtio-common/BoardConfigCommon.mk
 
@@ -28,9 +32,6 @@ BOARD_MESA3D_MESON_ARGS += -Dintel-clc=system
 BOARD_MESA3D_GALLIUM_DRIVERS += iris
 BOARD_MESA3D_VULKAN_DRIVERS += intel intel_hasvk
 endif
-
-# GRUB
-TARGET_GRUB_ARCH := x86_64-efi
 
 # Kernel
 BOARD_KERNEL_CMDLINE += \
